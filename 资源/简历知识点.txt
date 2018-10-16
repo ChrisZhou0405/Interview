@@ -1,0 +1,335 @@
+面试自我介绍
+您好 我叫周房城 来自广东河源 毕业于广东海洋大学计算机应用技术专业 工作了一年半，在工作的这段时间主要参与了两个系统的开发工作
+     第一： 维雅化妆后台管理系统 使用的是CodeSmith生成的模板 采用ADO。Net 三层架构访问数据，前端开发则是采用ASP.Net Webform 页面布局上是使用美工做好的静态页面进行迁移，我在开发过程中主要负责登陆模块、内容信息管理模块以及产品图片处理模块
+	 
+     第二：博高客户管理系统  使用EF5.0+MVC4.0开发，开发工具是VS2013，数据库使用的是sqlserver 2008R2，整个系统
+	        采用的开发框架是面向接口编程，使用EF5.0结合T4模板自动化生成数据访问层，前端开发采用的是MVC4.0框架，为了开发方便使用了区域进行开发，在页面布局上使用了JQuery插件ligerui，大量使用Ajax进行局部局部刷新数据，我在开发过程主要负责用户登陆模块，财务报销流程处理以及乐沟通。
+
+CRM项目：
+ (1) 整个框架中使用的autofac.dll
+autofac.dll  IOC的框架 
+IOC也叫控制反转
+DI也叫做依赖注入
+利用简单工厂以及结合autofac.dll这两个层面来进行阐述:
+如果使用简单工厂：dal的实例化控制权在bll这一层
+如果使用的是autofac,那么dal的实例化控制权由原来的bll层转移到了autofac中，这个控制权转移的过程称之为控制反转
+那么autofac 通过bll层的构造函数将dal的对象实例再交给bll层的过程，称之为依赖注入
+
+E:\2015我的传智\上课文档\训练营\20150723 MVC项目第5天
+
+
+一.EF框架：全称是ADO.NET Entity Framework，是微软开发的基于ADO.NET的ORM(Object/Relational Mapping)框架
+    特点：
+			1. 支持多种数据库(MSSQL, Oracle, and DB2)
+			2. 强劲的映射引擎，能很好地支持存储过程；
+			3. 提供Visual Studio集成工具，进行可视化操作
+			4. 能够与ASP.NET, WPF, WCF, WCF Data Services,asp.net,winform进行很好的集成。
+			
+			Entity Framework 用来操作数据库,可以帮助程序员操作数据库,相对于ADO.Net+SQL而言可以兼容众多数据库
+		    2、EF可以使用 System.Linq.QueryAble 这个静态类中的所有扩展方法结合 Lambda 表达式来帮助程序员生成sql语句
+		
+	        EF是如何工作的呢？
+		    EF的底层本质上也是通过Ado.Net去访问数据库的
+		    EF仅仅是帮助程序员自动生成Sql语句而已
+		
+	总结一点：
+	所有的ORM框架性能要比Ado.NET + Sql执行性能要低一点	
+	EF5.0 + .netFramework 4.5 性能远远要高于 EF5.0 + .netFramework4.0 ,大概提升了10倍
+			
+   个人理解：能够自动生成Sql语句 实行数据库相关操作 两套SQO（skip ThenBy  Join）方法1-》扩展子IEnumerable<TSource> 操作内存中的数据（List<T>）2-》扩展子IQuerable<TSource> 生成sql语句 操作数据库的 
+   
+   
+ 二MVC
+ MVC是微软2009对外公布的第一个开源的表示层框架，这是微软的第一个开源项目
+MVC目的不是取代WebFrom开发，只是web开发的另外一种选择
+
+ MVC 模式是一种表现模式。它将web应用程序分成三个主要组件即：视图（View）控制器（Controller）模型（Model）
+M：Model 主要是存储或者是处理数据的组件
+V：View 是用户接口层组件。主要是提供html模板并将Controller里获取的数据显示到页面中。
+     cshtml文件被用来处理视图的职责。
+C： Controller 处理用户交互，负责处理业务，并获取数据装入Model中，然后交给视图。
+
+MVC设计模式：
+控制器(Controller）- 负责转发请求，对请求进行处理。
+视图 (View） - 界面设计人员进行图形界面设计。
+模型 (Model）-业务逻辑、数据、验证规则、数据访问等等
+
+
+三 路由规则：
+	所有的mvc网站都有一条默认路由规则
+	默认路由规则注册代码在App_Start文件夹下的RouteConfig.cs中
+	当网站启动的时候通过调用Global.asax文件中的Application_Start方法,从而调用RouteConfig.cs文件中的
+	RegisterRoutes方法来达到注册路由规则的目的
+	
+	路由规则的作用：MVC利用路由规则来解析url中的路径中的控制器名称和action名称和参数值分别取自哪一段
+	
+	举例说明：
+		比如url的请求路径为: /Home/Index/100
+		那么MVC根据默认路由规则:{controller}/{action}/{id} 来解析出/Home/Index/100 这个路径中
+		控制器(Controller)为:Home
+		控制器中的action名称为:Index
+		参数值为: 100
+		
+四 控制器：
+Controller主要负责响应用户的输入。主要关注的是应用程序流，输入数据的处理，以及对相关视图(View)输出数据的提供。
+继承自：System.Web.Mvc.Controller
+
+一个Controller可以包含多个Action. 每一个Action都是一个方法, 返回一个ActionResult/string实例
+
+五  Razor视图引擎：
+Razor为视图提供精简的语法，最大限度减少了语法和额外字符串
+Razor通过理解标记的结构来实现代码和标记之间的顺畅切换。
+@核心转换字符，用来 标记-代码 的转换字符串。
+其他视图引擎：Spart,NHaml,Brail,StringTemplate,NVelocity
+
+六 模型注解：
+   模型上面的特性标签-模型注解 ==》 使用到using System.ComponentModel;using System.ComponentModel.DataAnnotations;这两个命名空间
+	配合@Html中的一系列扩展方法来使用
+   Eg: DisplayName 显示属性的名字 =》 @Html.DisplayNameFor(c => c.Name)
+       [Required(ErrorMessage = "名称非空")]=》@Html.ValidationMessageFor(c => c.Name)
+	   [Compare("Pwd", ErrorMessage="确认密码必须与原密码保持一致")]=》@Html.ValidationMessageFor(c => c.Pwd)
+
+七 MVC中的四大过滤器：
+方法过滤器  结果过滤器 验证过滤器  异常过滤器
+方法过滤器和结果过滤器的默认的实现为：ActionFilterAttribute
+Action==>ActionFilterAttribute
+Result==>ActionFilterAttribute
+AuthorizationFilter==>AuthorizeAttribute
+Exception==>HandleErrorAttribute
+过滤器本质上是一个特性标签：
+	1、如果想在某个方法上面实现过滤器的调用只需要将其贴到此方法上即可
+	2、如果想在某个控制器类中的所有方法都能够调用过滤器，在控制器类上贴上特性标签即可
+	--总结：上面两种方式比较灵活但是如果要所有的控制器中的方法都能够调用特性标签就需要在所有的控制器类上贴这个标签，导致程序
+	编写繁琐
+	
+	3、将特性标签注册成为全局，来监控所有的action方法
+	
+	PS验证过滤器
+		在任何方法和结果异常过滤器之前运行
+
+异常捕获过滤器
+	使用步骤：
+	1、新建一个类myExp 继承 HandleErrorAttribute
+	2、使用方式：
+		使用方式1：在action上面贴上myClass
+		使用方式2：在action所在的控制器上贴上 myClass
+		使用方式3：在App_Start\FilterConfig.cs 中注册 成为全局过滤器: filters.Add(new myClass());
+
+区域:
+	使用：
+	如何建立一个区域?
+	在MVC网站上右键添加一个区域即可
+	
+	区域中的三个文件：
+	Controllers下面的所有控制器都是属于当前区域的
+	Views文件夹下面的所有视图，都是属于当前区域的，在当前区域的所有action方法中使用return View()返回的视图最终是要查找这个文件夹下的视图的
+	 public class adminAreaRegistration : AreaRegistration 
+	 继承自AreaRegistration的类的作用：
+	 1、RegisterArea（）
+		作用：负责注册当前区域路由规则，
+		在什么时候注册？
+		是在网站启动以后的第一个请求处理之前，通过调用Global Application_Start()方法中的  AreaRegistration.RegisterAllAreas();方法中的
+		而调用的,有且调用一次
+		
+		这种注册方式是会自动加上namespacne命名空间约束的,那么命名空间的内容如何获取到？
+		这个命名空间字符串就是与当前RegisterArea（）方法所在类中的命名空间保持一致
+		
+	 2、AreaName
+		指示视图引擎去哪个区域文件夹的Views中查找指定的视图
+
+八 委托：
+ 就是一个能存放符合某种格式(方法签名)的方法的指针 的容器
+ 多播委托：通常将包含多个方法指针的委托叫多播委托
+ 从反编译工具可以看出，其实每个用户定义的委托类型编译后都是一个继承于多播委托的类
+委托的两个目的：
+一、能将方法作为 参数 和 返回值 传递 - 函数式编程 ruby,F#
+二、调用一个委托，执行N个方法  --- （多播委托 - 观察者模式） 
+
+事件与委托 的区别
+委托是类
+事件 是用来封装 ，“属性封装”的机制
+
+
+
+
+九 设计模式：
+1单例模式：
+public partial class FrmSingle : Form
+    {
+        // 1.0首先将构造函数私有化
+       private  FrmSingle()
+        {
+            InitializeComponent();
+        }
+
+        //2.0提供一个共有的创建实例的方法 供外界访问调用
+       private static  FrmSingle single;
+        public static FrmSingle GetInstence()
+        {
+            if (single==null||single.IsDisposed)
+            {
+               single = new FrmSingle();
+            }
+            
+            return single;
+        }
+
+    }
+2观察者模式：
+
+namespace M02设计模式之观察者模式
+{
+    //定义一个委托
+    public delegate void DGAction();
+
+    //事件管理类
+   public class EventMgr
+    {
+        //定义一个DGAction委托类型的事件
+        public static event DGAction DGActionHandle;
+        public static void Run()
+        {
+            if (DGActionHandle!=null)
+            {
+                DGActionHandle(); //若不事件不为空 则执行事件
+            }
+        } 
+    }
+}
+
+ private void button1_Click(object sender, EventArgs e)
+        {
+            Dog dog = new Dog();
+            Master ma = new Master();
+            Thief th = new Thief();
+            dog.Shout();
+        }
+		
+		
+namespace M02设计模式之观察者模式
+{
+   public class Master
+    {
+        public Master()
+        {
+            EventMgr.DGActionHandle += WakeUp;
+        }
+
+        //惊醒的方法
+        public void WakeUp()
+        {
+            Console.WriteLine(" 主人-->站住 别跑！！");
+        }
+    }
+
+   
+}
+
+namespace M02设计模式之观察者模式
+{
+   public  class Thief
+    {
+        public Thief()
+        {
+            EventMgr.DGActionHandle += Escape;
+        }
+
+        public void Escape()
+        {
+            Console.WriteLine("小偷-->糟糕！赶紧跑！！");
+        }
+    }
+}
+
+namespace M02设计模式之观察者模式
+{
+  public class Dog
+    {
+        public void Shout()
+        {
+            Console.WriteLine(" 狗-->有小偷！！ ");
+            EventMgr.Run();
+        }
+    }
+}
+
+
+递归算法：
+namespace 递归算法
+{
+    class Program
+    {
+        //*****计算数组{ 1,1,2,3,5,8.......} 第30位值*****
+
+        static void Main(string[] args)
+        {
+            // NotRecursion();
+            Console.WriteLine(Recursion(5));
+            Console.ReadKey();
+        }
+        //1.0不用递归的实现方法
+        static void NotRecursion()
+        {
+            int[] num = new int[30];
+            num[0] = 1;
+            num[1] = 1;
+            int first = num[0];
+            int second = num[1];
+            for (int i = 2; i < num.Length; i++)
+            {
+                num[i] = first + second;
+                first = second;
+                second = num[i];
+
+            }
+            Console.WriteLine(num[5]);
+        }
+        //2.0采用递归的实现方法
+        static int Recursion(int i)
+        {
+            if (i <= 0) return 1;
+            if (i > 0 && i < 2) return 1;
+            else return Recursion(i - 2) + Recursion(i - 1);
+        }
+
+        //计算1+2+3+4+...+100的值
+        static int RecurHun(int i)
+        {
+            if (i == 0) return 0;
+            return RecurHun(i - 1) + i;
+        }
+
+        //计算1 -2 +3 +-4+ 5- 6 + 7 - 8 + 9的值
+        static int RecurNin(int i)
+        {
+            if (i == 0) return 1;
+            if (i == 1) return 2;
+            else return RecurNin(i - 2) + i;
+        }
+    }
+	
+	冒泡排序：
+	 static void BubbleSort()
+        {
+            //1.0定义要进行排序的数组
+            int[] data = new int[] { 4, 21, 9, 8,3};
+            Console.WriteLine("排序前数组:{" + string.Join(",", data) + "}");
+
+            //2.0利用冒泡排序算法从小到大进行排列
+            int dataLength = data.Length;//获取数组的长度
+            int temp;//临时变量
+            for (int i = dataLength-1; i >0; i--)//要比较的趟数
+            {
+                for (int j = 0; j < i; j++)
+                {
+                    //若左边》右边 交换位置
+                    if (data[j]>data[j+1])
+                    {
+                        temp = data[j];
+                        data[j] = data[j + 1];
+                        data[j + 1] = temp;
+                    }
+                }
+            }
+            Console.WriteLine("排序后数组:{" + string.Join(",", data) + "}");
+        }
