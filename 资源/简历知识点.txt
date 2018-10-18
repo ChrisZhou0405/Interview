@@ -293,20 +293,21 @@ namespace 递归算法
         }
 
         //计算1+2+3+4+...+100的值
-        static int RecurHun(int i)
+        static int RecurHun(int num)
         {
-            if (i == 0) return 0;
-            return RecurHun(i - 1) + i;
+            if (num== 0) return 0;
+            return RecurHun(num - 1) + num;
         }
 
-        //计算1 -2 +3 +-4+ 5- 6 + 7 - 8 + 9的值
-        static int RecurNin(int i)
+        //计算1 -2 +3 -4+ 5- 6 + 7 - 8 + 9的值
+        static int RecurNin(int num)
         {
-            if (i == 0) return 1;
-            if (i == 1) return 2;
-            else return RecurNin(i - 2) + i;
+            if (num == 0) return 1;
+            if (num == 1) return 2;
+            else return RecurNin(num - 2) + num;
         }
     }
+}
 	
 	冒泡排序：
 	 static void BubbleSort()
