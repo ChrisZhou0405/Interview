@@ -40,5 +40,24 @@ namespace 冒泡排序
             Console.WriteLine("排序后数组:{" + string.Join(",", data) + "}");
         }
 
+        //--------
+        public  void BubbleSort2()
+        {
+            int[] data = new int[] { 1, 9, 88, 95, 5 };
+            int dataLength = data.Length;
+            int temp;
+            for (int i = dataLength-1; i >0; i--)
+            {
+                for (int j = 0; j < i; j++)
+                {
+                    if (data[j]>data[j+1])
+                    {
+                        temp = data[j];
+                        data[j] = data[j + 1];
+                        data[j + 1] = temp;
+                    }
+                }
+            }
+        }
     }     
 }
