@@ -264,7 +264,14 @@ namespace 递归算法
         static void Main(string[] args)
         {
             // NotRecursion();
-            Console.WriteLine(Recursion(5));
+
+
+            
+            Console.WriteLine(NoRecurNin(1));
+            Console.WriteLine(NoRecurNin(2));
+            Console.WriteLine(NoRecurNin(3));
+            Console.WriteLine(NoRecurNin(4));
+
             Console.ReadKey();
         }
         //1.0不用递归的实现方法
@@ -292,20 +299,52 @@ namespace 递归算法
             else return Recursion(i - 2) + Recursion(i - 1);
         }
 
-        //计算1+2+3+4+...+100的值
+
+        #region 计算1+2+3+4+...+100的值
+
+        static int NoRecurHun(int num)
+        {
+            int result = 0;
+            for (int i = 0; i <=num; i++)
+            {
+                result += i;
+            }
+            return result;
+        }
+        
         static int RecurHun(int num)
         {
             if (num== 0) return 0;
             return RecurHun(num - 1) + num;
         }
+        #endregion
 
-        //计算1 -2 +3 -4+ 5- 6 + 7 - 8 + 9的值
+        #region 计算1 -2 +3 -4+ 5- 6 + 7 - 8 + 9的值
+        static int NoRecurNin(int num)
+        {
+            int sum = 0;
+            for (int i = 0; i <= num; i++)
+            {
+                if (i%2==0)
+                {
+                    sum-=i;
+                }
+                else
+                {
+                    sum += i;
+                }
+            }
+            return sum;
+        }
+
         static int RecurNin(int num)
         {
-            if (num == 0) return 1;
-            if (num == 1) return 2;
-            else return RecurNin(num - 2) + num;
-        }
+            int temp = num;
+            if (num == 1) return 1;
+            if (num % 2 == 0) num = -num;
+            return RecurNin(temp - 1) + num;
+        } 
+        #endregion
     }
 }
 	
